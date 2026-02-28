@@ -1,0 +1,124 @@
+{
+  "skill_name": "dev-planning",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我的 Spring Boot 项目（Java 17 + Maven）里需要做一个用户登录功能，要求用户名密码登录，用 JWT 鉴权，登录失败三次锁定账号 30 分钟。项目已经有 Spring Security 依赖，用户表是 t_user，密码用 BCrypt 存的。帮我实现一下。",
+      "expected_output": "必须先提问（至少3个问题），然后生成完整的 docs/dev-plan.md 规划文件，包含需求分析、架构概览、技术方案、依赖清单、任务拆分（含单测）、环境部署、风险注意事项等章节，之后才开始编码",
+      "assertions": [
+        {
+          "name": "必须先提问再规划",
+          "check": "响应中先出现提问内容，规划文件写入在提问之后"
+        },
+        {
+          "name": "规划文件路径正确",
+          "check": "规划文件保存到 docs/dev-plan.md（Maven 项目）"
+        },
+        {
+          "name": "规划包含五个必要章节",
+          "check": "规划文件含有：需求分析、技术方案、任务拆分、环境与部署、风险与注意事项"
+        },
+        {
+          "name": "任务拆分包含单测任务",
+          "check": "任务列表中有单元测试/联调验收相关的子任务"
+        },
+        {
+          "name": "提到锁定需求",
+          "check": "规划中提及登录失败锁定账号的处理方案"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "我们的电商平台（Next.js + TypeScript + Prisma + PostgreSQL）订单列表页加载很慢，大概 5-8 秒，现在日订单量大概 50 万条。PM 要求首屏必须在 1.5 秒以内。帮我重构一下查询和前端渲染逻辑。",
+      "expected_output": "先提问（特别关注当前查询方式、索引情况、是否有缓存），然后生成 DEV_PLAN.md（Next.js 项目），规划中包含性能基准、优化方向（分页/索引/缓存/SSR等）、任务拆分",
+      "assertions": [
+        {
+          "name": "提问包含性能诊断维度",
+          "check": "提问中涉及当前性能瓶颈诊断，如索引、查询方式、缓存"
+        },
+        {
+          "name": "规划文件路径正确",
+          "check": "Next.js 项目规划文件保存到 DEV_PLAN.md"
+        },
+        {
+          "name": "规划中有可量化验收标准",
+          "check": "验收标准中包含具体性能指标（如首屏 < 1.5s）"
+        },
+        {
+          "name": "规划包含架构概览",
+          "check": "规划文件包含架构概览或优化方案的层次描述"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "线上有个 bug，用户上传头像后，如果文件名包含中文字符就会报 500 错误，日志显示 java.io.IOException: Invalid file name。这是 Spring Boot 项目，文件上传用的 MultipartFile，存到 OSS。帮我修复这个 bug。",
+      "expected_output": "先简要确认 bug 范围（是否所有中文文件名都报错、OSS 是哪家、Spring Boot 版本），然后生成 docs/dev-plan.md，注明这是 Bug 修复，包含根因分析、修复方案、测试用例设计",
+      "assertions": [
+        {
+          "name": "提问明确但简洁",
+          "check": "提问聚焦于 bug 复现条件和技术栈确认，不超过 3 个问题"
+        },
+        {
+          "name": "规划包含根因分析",
+          "check": "规划文件中有对文件名编码问题的根因分析"
+        },
+        {
+          "name": "规划包含测试用例设计",
+          "check": "验收标准中包含中文文件名、特殊字符等边界测试用例"
+        },
+        {
+          "name": "规划标注为 Bug 修复",
+          "check": "规划标题或状态说明这是 Bug 修复任务"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I need to build a new Flutter app for tracking daily water intake. Users can log cups of water, set daily goals, and see a weekly chart. This is a brand new project, no existing code. I'm using Flutter 3.24 with Riverpod for state management.",
+      "expected_output": "用英文提问和规划，规划文件路径为 docs/dev-plan.md（Flutter 项目），包含功能范围、技术方案（Flutter/Riverpod 相关）、任务拆分、本地存储方案",
+      "assertions": [
+        {
+          "name": "全程用英文",
+          "check": "提问和规划文件均使用英文"
+        },
+        {
+          "name": "识别为 Flutter 项目",
+          "check": "规划文件保存到 docs/dev-plan.md"
+        },
+        {
+          "name": "规划包含数据持久化方案",
+          "check": "规划中提及本地存储方案（如 Hive、SharedPreferences、SQLite）"
+        },
+        {
+          "name": "提问覆盖 UI/UX 设计偏好",
+          "check": "提问中询问 UI 风格或是否有设计稿"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "我们的 Python 数据处理服务（requirements.txt 里有 pandas、scikit-learn、torch）现在代码很乱，UserDataProcessor 这个类有 800 多行，想把它拆分成更小的模块，要求不能改变对外接口，现有的单测必须全部通过。",
+      "expected_output": "先提问（关注现有接口定义、单测覆盖率、拆分策略），识别为 Python AI/ML 项目，规划文件路径 docs/dev-plan.md，规划中重点说明接口兼容性保障方案和重构策略",
+      "assertions": [
+        {
+          "name": "识别为 Python/AI 项目",
+          "check": "规划文件保存到 docs/dev-plan.md"
+        },
+        {
+          "name": "提问关注接口兼容性",
+          "check": "提问中涉及现有对外接口和兼容性要求"
+        },
+        {
+          "name": "规划中包含兼容性保障策略",
+          "check": "规划文件中说明如何确保重构后接口不变（如 Facade 模式或 re-export）"
+        },
+        {
+          "name": "任务拆分包含回归测试",
+          "check": "任务列表中包含运行现有单测验证的步骤"
+        }
+      ]
+    }
+  ]
+}
