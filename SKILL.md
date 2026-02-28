@@ -52,16 +52,31 @@ version: v1.0
 
 | 优先级 | 判断依据 | 项目类型 | 规划文件路径 |
 |--------|---------|---------|------------|
-| 1 | `pom.xml` 存在 | Java/Maven | `docs/dev-plan.md` |
-| 2 | `build.gradle` 或 `build.gradle.kts` 存在 | Java/Gradle | `docs/dev-plan.md` |
+| 1 | `pom.xml` 存在 | Java / Maven | `docs/dev-plan.md` |
+| 2 | `build.gradle` 或 `build.gradle.kts` 存在 | Java / Gradle 或 Android | `docs/dev-plan.md` |
 | 3 | `src/main/java` 目录存在 | Spring Boot | `docs/dev-plan.md` |
-| 4 | `pyproject.toml` 或 `requirements.txt` 存在 | Python | `docs/dev-plan.md` |
-| 5 | `package.json` 且 `src/` 目录存在 | Node.js 前端 | `DEV_PLAN.md` |
-| 6 | `go.mod` 存在 | Go | `docs/dev-plan.md` |
-| 7 | `Cargo.toml` 存在 | Rust | `docs/dev-plan.md` |
-| 8 | `index.html` 或根目录有 `.html` 文件 | 纯前端 | `DEV_PLAN.md` |
-| 9 | 以上均不匹配 | 通用 | `.claude/dev-plan.md` |
+| 4 | `pubspec.yaml` 存在 | Dart / Flutter | `docs/dev-plan.md` |
+| 5 | `*.xcodeproj` 或 `*.xcworkspace` 目录存在 | iOS / Swift / Xcode | `docs/dev-plan.md` |
+| 6 | `Gemfile` 存在 | Ruby / Rails | `docs/dev-plan.md` |
+| 7 | `composer.json` 存在 | PHP / Laravel | `docs/dev-plan.md` |
+| 8 | `*.csproj` 或 `*.sln` 存在 | .NET / C# | `docs/dev-plan.md` |
+| 9 | `pyproject.toml` 存在，或 `requirements.txt` 中含 `torch`/`tensorflow`/`transformers` | Python / AI·ML | `docs/dev-plan.md` |
+| 10 | `pyproject.toml` 或 `requirements.txt` 存在（普通 Python） | Python | `docs/dev-plan.md` |
+| 11 | `go.mod` 存在 | Go | `docs/dev-plan.md` |
+| 12 | `Cargo.toml` 存在 | Rust | `docs/dev-plan.md` |
+| 13 | `tsconfig.json` 存在且无 `package.json` | 纯 TypeScript | `DEV_PLAN.md` |
+| 14 | `package.json` 且含 `react-native` 依赖 | React Native | `DEV_PLAN.md` |
+| 15 | `package.json` 且含 `vue` 或 `nuxt` 依赖 | Vue / Nuxt | `DEV_PLAN.md` |
+| 16 | `package.json` 且含 `next` 依赖 | Next.js | `DEV_PLAN.md` |
+| 17 | `package.json` 且 `src/` 目录存在 | Node.js / 前端 | `DEV_PLAN.md` |
+| 18 | `index.html` 或根目录有 `.html` 文件 | 纯前端 | `DEV_PLAN.md` |
+| 19 | 根目录存在多个不同语言的特征文件（Monorepo） | Monorepo | `.claude/dev-plan.md` |
+| 20 | 以上均不匹配 | 通用 | `.claude/dev-plan.md` |
 
+**特殊情况：**
+
+- **Monorepo**：若根目录同时存在多种语言特征文件（如同时有 `pom.xml` 和 `package.json`），说明是多语言 Monorepo，规划文件放 `.claude/dev-plan.md`，并在规划中注明影响的子项目
+- **AI/ML 项目**：检测到 `requirements.txt` 含有 `torch`、`tensorflow`、`transformers`、`scikit-learn`、`keras`、`jax` 等 ML 依赖时，规划中需额外关注模型版本、GPU 资源、数据集处理等
 - 若 `docs/` 目录不存在，**自动创建**
 - 若规划文件已存在，在文件末尾**追加新任务规划**（保留历史记录，不覆盖）
 
