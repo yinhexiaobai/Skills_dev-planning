@@ -5,7 +5,16 @@ description: >
   创建项目、重构代码、修复 Bug（非单行修复）时触发。
   强制执行：提问澄清 → 写入开发规划文件 → 再开始编码。
   绝对不允许跳过规划直接写代码。
-version: v1.0
+
+  触发场景包括但不限于：新增功能（add feature, implement, build, create）、
+  代码重构（refactor, restructure, reorganize）、Bug 修复（fix bug, resolve issue）、
+  性能优化（optimize, improve performance）、架构调整（architecture change）、
+  新建项目（new project, scaffold, initialize）、模块开发（develop module）。
+
+  支持中英文任务描述。Use this skill for any coding task including: implementing features,
+  building modules, creating projects, refactoring code, fixing bugs (non-trivial),
+  optimizing performance, or making architectural changes. Always plan before coding.
+version: v1.1
 ---
 
 # 开发规划 Skill
